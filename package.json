@@ -1,0 +1,15 @@
+{
+	"name": "zapster-solitaire-logic",
+	"version": "0.83.0",
+	"description": "Implementation of the rules of Zapster Solitaire",
+	"author": {
+		"name": "Pixievolt No. 1",
+		"url": "https://pixievoltno1.com"
+	},
+	"homepage": "https://github.com/PixievoltNo1/zapster-solitaire-logic",
+	"bugs": "https://github.com/PixievoltNo1/zapster-solitaire-logic/issues",
+	"repository": "github:PixievoltNo1/zapster-solitaire-logic",
+	"funding": "https://sponsus.org/u/pixievoltno1",
+	"module": "index.mjs",
+	"license": "MIT"
+}
