@@ -6,6 +6,22 @@ This module provides *only* the logic, not a UI, and is made *only* for interact
 
 This project has a [Code of Conduct](CODE_OF_CONDUCT.md). By participating in the Git repo or issues tracker, you agree to be as courteous, welcoming, and generally a lovely person as its terms require. 😊
 
+<!-- toc -->
+
+- [Card objects](#card-objects)
+- [Exported variable: `state`](#exported-variable-state)
+- [Exported function: `start`](#exported-function-start)
+- [Exported constant: `stdSettings`](#exported-constant-stdsettings)
+- [Exported function: `draw`](#exported-function-draw)
+- [Exported function: `zap`](#exported-function-zap)
+- [Exported variable: `moveLog`](#exported-variable-movelog)
+- [Exported function: `analyze`](#exported-function-analyze)
+- [Exported function: `hasPower`](#exported-function-haspower)
+- [Exported function: `suspendGame`](#exported-function-suspendgame)
+- [Exported function: `resumeGame`](#exported-function-resumegame)
+
+<!-- tocstop -->
+
 # Card objects
 
 Each object represents one card, and a given card's object will be reused as it reappears throughout the `state` and `moveLog` objects. It has these properties:
