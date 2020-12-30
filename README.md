@@ -82,13 +82,13 @@ The results of the most recent move. Replaced with a new object for each move. H
 * (optional) `zapped`: The chosen [card](#card-objects) for a zap move.
 * (optional) `discards`: An array of [cards](#card-objects) sent from the cells to the trash. Doesn't contain `moveLog.drew` or `moveLog.zapped`. For draw moves, the absence of this property means the drawn card matched nothing and was placed in a cell. For zap moves, this property always exists but may be an empty array.
 * (optional) `jackPower`: An object representing the results of a Jack's power. Contains these properties:
-** `success`: A boolean indicating whether there was a numbered card for this power to use.
-** (optional) `usedValueOf`: The [card](#card-objects) whose number was used for this power.
-** (optional) `draws`: An array of [cards](#card-objects) drawn via this power.
+	* `success`: A boolean indicating whether there was a numbered card for this power to use.
+	* (optional) `usedValueOf`: The [card](#card-objects) whose number was used for this power.
+	* (optional) `draws`: An array of [cards](#card-objects) drawn via this power.
 * (optional) `queenPower`: An object representing the results of a Queen's power. Contains these properties:
-** `success`: As for `jackPower`.
-** (optional) `usedValueOf`: As for `jackPower`.
-** (optional) `changedFrom`: The previous number of cells the player had.
+	* `success`: As for `jackPower`.
+	* (optional) `usedValueOf`: As for `jackPower`.
+	* (optional) `changedFrom`: The previous number of cells the player had.
 * (optional) `kingPower`: `true` if a King's power granted a zap.
 * (optional) `won`: `true` if the game ended with the player's victory!
 * (optional) `lost`: An array of [cards](#card-objects) that couldn't be placed in cells, resulting in the player losing the game.
@@ -105,11 +105,11 @@ Determines various pieces of data about the game in progress that players would 
 * `drawPileCounts`: An object with a property for each rank in the game settings, where each value is the number of cards of that rank remaining in the draw pile. (Someone playing this game in real life could figure this out by adding together the cards in the trash pile and cells, and subtracting them all from the cards they know they started with.)
 * `cellCounts`: Like `drawPileCounts`, but instead counting cards in the cells.
 * (optional) `jackPower`: Present if there's a Jack and a numbered card in the cells. It's an object detailing what happens if the Jack's power were activated now, with the following properties:
-** `draws`: The number of cards to be drawn, before applying the rule "If there are not enough cards remaining in the draw pile, draw all of them".
-** `loseOnDraw`: A boolean indicating whether you would lose if your next move were a draw, and the drawn card were a Jack. Calculated *after* applying the rule mentioned above, with the draw pile not having the drawn Jack.
+	* `draws`: The number of cards to be drawn, before applying the rule "If there are not enough cards remaining in the draw pile, draw all of them".
+	* `loseOnDraw`: A boolean indicating whether you would lose if your next move were a draw, and the drawn card were a Jack. Calculated *after* applying the rule mentioned above, with the draw pile not having the drawn Jack.
 * (optional) `queenPower`: Like `jackPower`, but for Queens. The object has these properties:
-** `cells`: The number of cells you would have.
-** `lose`: A boolean indicating whether this power would make you lose the game.
+	* `cells`: The number of cells you would have.
+	* `lose`: A boolean indicating whether this power would make you lose the game.
 
 # Exported function: `hasPower`
 
