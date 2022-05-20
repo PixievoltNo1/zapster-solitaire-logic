@@ -11,5 +11,8 @@
 	"repository": "github:PixievoltNo1/zapster-solitaire-logic",
 	"funding": "https://sponsus.org/u/pixievoltno1",
 	"module": "index.mjs",
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {
+		"columnify": "^1.6.0"
+	}
 }
