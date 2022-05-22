@@ -1,7 +1,7 @@
 import * as zapster from "./index.mjs";
 function botGame(bot, settings) {
 	zapster.start(settings);
-	bot();
+	bot(zapster);
 	if (zapster.moveLog.won) { return "Won"; }
 	if (zapster.moveLog.lost) {
 		if (zapster.moveLog.jackPower) { return "Lost by J"; }

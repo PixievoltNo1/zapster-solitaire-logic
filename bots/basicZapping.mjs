@@ -1,11 +1,10 @@
-import * as zapster from "../index.mjs";
-import { state, moveLog } from "../index.mjs";
-export default function play() {
+export default function play(zapster) {
+	let {state} = zapster;
 	do {
 		if (state.zaps && state.cellCards.length == state.noOfCells) {
 			zapster.zap(state.cellCards[0]);
 		} else {
 			zapster.draw();
 		}
-	} while ( !moveLog.won && !moveLog.lost )
+	} while ( !zapster.moveLog.won && !zapster.moveLog.lost )
 }

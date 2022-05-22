@@ -1,7 +1,5 @@
-import * as zapster from "../index.mjs";
-import { moveLog } from "../index.mjs";
-export default function play() {
+export default function play(zapster) {
 	do {
 		zapster.draw();
-	} while ( !moveLog.won && !moveLog.lost )
+	} while ( !zapster.moveLog.won && !zapster.moveLog.lost )
 }
