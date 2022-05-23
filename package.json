@@ -13,6 +13,7 @@
 	"module": "index.mjs",
 	"license": "MIT",
 	"devDependencies": {
+		"arg": "^5.0.1",
 		"columnify": "^1.6.0"
 	}
 }
