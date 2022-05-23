@@ -27,6 +27,7 @@ export function start(settings) {
 		cellCards: [],
 		zaps: settings.startingZaps
 	}
+	moveLog = undefined;
 }
 export function draw() {
 	moveLog = {};
@@ -171,11 +172,13 @@ export function suspendGame() {
 	data.cellCards = state.cellCards.map( function(card) {
 		return card.suit * ranks.length + ranks.indexOf(card.rank);
 	} );
-	state = null;
+	state = undefined;
+	moveLog = undefined;
 	return data;
 }
 export function resumeGame(data, settings) {
 	ranks = settings.ranks;
 	data.cellCards = data.cellCards.map( makeCard );
 	state = data;
+	moveLog = undefined;
 }
