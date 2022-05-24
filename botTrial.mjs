@@ -20,10 +20,13 @@ let args = arg({
 	"--trials": Number,
 	"-t": "--trials",
 });
-let bot = ( await import( new URL(args._[0], import.meta.url) ) ).default;
-let zapster = ( await import( new URL(args["--rules"] ?? "index.mjs", import.meta.url) ) );
-if (args["--strict"]) {
-	zapster = ( await import("./strictEnforcement.mjs") ).default(zapster);
+let [bot, zapster, strictEnforcement] = await Promise.all([
+	import( new URL(args._[0], import.meta.url) ).then( (module) => module.default ),
+	import( new URL(args["--rules"] ?? "index.mjs", import.meta.url) ),
+	args["--strict"] && import("./strictEnforcement.mjs").then( (module) => module.default ),
+]);
+if (strictEnforcement) {
+	zapster = strictEnforcement(zapster);
 }
 const gamesPerMode = args["--trials"] ?? 1000;
 let data = [];
