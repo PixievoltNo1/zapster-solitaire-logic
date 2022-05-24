@@ -10,7 +10,7 @@
 	"bugs": "https://github.com/PixievoltNo1/zapster-solitaire-logic/issues",
 	"repository": "github:PixievoltNo1/zapster-solitaire-logic",
 	"funding": "https://sponsus.org/u/pixievoltno1",
-	"module": "index.mjs",
+	"module": "zapster.mjs",
 	"license": "MIT",
 	"devDependencies": {
 		"arg": "^5.0.1",

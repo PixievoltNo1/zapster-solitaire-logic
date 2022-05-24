@@ -22,7 +22,7 @@ let args = arg({
 });
 let [bot, zapster, strictEnforcement] = await Promise.all([
 	import( new URL(args._[0], import.meta.url) ).then( (module) => module.default ),
-	import( new URL(args["--rules"] ?? "index.mjs", import.meta.url) ),
+	import( new URL(args["--rules"] ?? "zapster.mjs", import.meta.url) ),
 	args["--strict"] && import("./strictEnforcement.mjs").then( (module) => module.default ),
 ]);
 if (strictEnforcement) {
