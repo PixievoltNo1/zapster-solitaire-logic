@@ -10,6 +10,7 @@ function botGame(bot, settings) {
 	throw new Error("Returned without finishing game");
 }
 
+import { pathToFileURL } from "url";
 import columnify from "columnify";
 import arg from "arg";
 let args = arg({
@@ -21,8 +22,8 @@ let args = arg({
 	"-t": "--trials",
 });
 let [bot, zapster, strictEnforcement] = await Promise.all([
-	import( new URL(args._[0], import.meta.url) ).then( (module) => module.default ),
-	import( new URL(args["--rules"] ?? "zapster.mjs", import.meta.url) ),
+	import( pathToFileURL(args._[0]) ).then( (module) => module.default ),
+	import( args["--rules"] ? pathToFileURL(args["--rules"]) : "./zapster.mjs" ),
 	args["--strict"] && import("./strictEnforcement.mjs").then( (module) => module.default ),
 ]);
 if (strictEnforcement) {
