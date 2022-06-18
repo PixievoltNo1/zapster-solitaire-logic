@@ -1,8 +1,8 @@
-This module provides the game logic of Zapster Solitaire, my original [solitaire/patience](https://en.wikipedia.org/wiki/Patience_(game)) game, and it's the exact same module used by the Web version. I made it available in the hopes of seeing fellow coders develop bot players or interesting variations with it.
+This package provides the game logic of Zapster Solitaire, my original [solitaire/patience](https://en.wikipedia.org/wiki/Patience_(game)) game, as well as utilities and examples for bot play. I made it available in the hopes of seeing fellow coders develop better bot players or interesting game variations with it.
 
 [Learn how to play Zapster Solitaire](https://pixievoltno1.com/web/Zapster/help.html) or [play the Web version](https://pixievoltno1.com/web/Zapster/).
 
-This module provides *only* the logic, not a UI, and is made *only* for interaction by other JavaScript code. If you only want to play Zapster Solitaire without doing any coding, use the Web version above (not open source).
+Everything here is for use by fellow code nerds. If you only want to play Zapster Solitaire without doing any coding, use the Web version above (not open source).
 
 This project has a [Code of Conduct](CODE_OF_CONDUCT.md). By participating in the Git repo or issues tracker, you agree to be as courteous, welcoming, and generally a lovely person as its terms require. 😊
 
@@ -20,10 +20,14 @@ This project has a [Code of Conduct](CODE_OF_CONDUCT.md). By participating in th
   * [Exported function: `hasPower`](#exported-function-haspower)
   * [Exported function: `suspendGame`](#exported-function-suspendgame)
   * [Exported function: `resumeGame`](#exported-function-resumegame)
+- [Bot proving grounds: `botTrial.mjs`](#bot-proving-grounds-bottrialmjs)
+- [Stricter rules enforcement: `strictEnforcement.mjs`](#stricter-rules-enforcement-strictenforcementmjs)
 
 <!-- tocstop -->
 
 # Rules implementation: `zapster.mjs`
+
+This module implements everything needed to play Zapster Solitaire, and it's the exact same module used by the Web version.
 
 ## Card objects
 
@@ -73,7 +77,7 @@ Performs a draw move in the current game, and updates [`moveLog`](#exported-vari
 <i>Parameter: `target` ([card](#card-objects))</i><br>
 <i>No return value</i>
 
-Uses a zap on `target` (which must be an object held in `state.cellCards`), and updates [`moveLog`](#exported-variable-movelog) with the results. Avoid calling this if no zaps remain.
+Uses a zap on `target` (which must be an object held in `state.cellCards`), and updates [`moveLog`](#exported-variable-movelog) with the results.
 
 ## Exported variable: `moveLog`
 
@@ -95,8 +99,6 @@ The results of the most recent move. Replaced with a new object for each move. H
 * (optional) `kingPower`: `true` if a King's power granted a zap.
 * (optional) `won`: `true` if the game ended with the player's victory!
 * (optional) `lost`: An array of [cards](#card-objects) that couldn't be placed in cells, resulting in the player losing the game.
-
-Avoid calling `draw` or `zap` after a `won` or `lost` property has appeared.
 
 ## Exported function: `analyze`
 
@@ -134,3 +136,21 @@ Mutates `state` into a form more suitable for serializing to JSON, returns it, a
 <i>No return value</i>
 
 Mutates `data` to reverse the changes of `suspendGame` and sets it to `state`, allowing the game to proceed. `settings` must be the same object used in the `start` call that started the game.
+
+# Bot proving grounds: `botTrial.mjs`
+
+This is a CLI app for testing bot players for Zapster Solitaire. See [its dedicated README](botTrial_README.md) for more info. It is not designed to be imported by another module.
+
+# Stricter rules enforcement: `strictEnforcement.mjs`
+
+As zapster.mjs is made for use by a web app that already prevents illegal moves, it does not enforce these rules by default:
+
+* You cannot make any more moves once you've won or lost.
+* You must have at least one zap remaining to use a zap.
+* A card must be in a cell in order to zap it.
+
+If you're writing a bot for Zapster and you want to avoid accidentally breaking these rules, you can import `strictEnforcement.mjs`. Its default export is a function that takes a zapster.mjs exports object (as you'd get from `import * as myObject from "./zapster.mjs";` or `await import("./zapster.mjs")`), and returns an object that has the same interface but will throw errors when any rule above is broken. If you're using the botTrial.mjs app, it will do this for you when you use the [`--strict` option](botTrial_README.md#strict-option).
+
+# Game design change proposal: `zapster_proposal.mjs`
+
+This module implements [a new version of the game rules](https://blog.pixievoltno1.com/2020/12/30/improving-zapster-solitaires-game-design/) - in short, aces are out, 10s are in, and starting cells are increased to 7. It is otherwise fully interchangeable with zapster.mjs, and bot authors are invited to play against both rulesets. It is hoped that for the best human & bot players, the new rules will increase the winrate but not to 100%, and the rate of losing to Jack powers will see no more than a slight increase.
